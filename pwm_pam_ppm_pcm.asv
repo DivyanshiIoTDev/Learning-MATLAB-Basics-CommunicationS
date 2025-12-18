@@ -1,0 +1,20 @@
+%PWM,PPM,PAM,PCM
+fc=1000;
+fs=10*fc;
+t=0:1/fs:100;
+fm=5;
+signal=5*sin(2*pi*fm*t);
+carrier=5*sawtooth(2*pi*fc*t,0.5); %other argument is width-0.5 is uniform sawtooth,1 is std sawtooth with sharp rise and fall 
+pwmsignal=signal>carrier; %using comparators
+subplot(2,2,1);
+hold on;
+plot(t,signal);
+xlabel('Time');
+ylabel('Amplitude');
+hold off;
+subplot(2,2,2);
+hold on;
+plot(t, pwmsignal);
+xlabel('Time');
+ylabel('PWM Signal');
+hold off;
